@@ -1,5 +1,5 @@
 # Piccies
 
-A simple Rails + Angular picture gallery SPA.
+A simple Rails + Angular picture album.
 
 by David Maldonado
