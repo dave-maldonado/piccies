@@ -1,59 +1,56 @@
 module Api
   module V1
     class AlbumsController < BaseController
-      # GET /albums
-      # GET /albums.json
-      def index
-        @albums = Album.all
 
-        render json: @albums
+      # GET /albums
+      def index
+        render json: Album.all
       end
 
       # GET /albums/1
-      # GET /albums/1.json
       def show
-        @album = Album.find(params[:id])
-
-        render json: @album
+        render json: Album.find(params[:id])
       end
 
       # POST /albums
-      # POST /albums.json
       def create
-        @album = Album.new(album_params)
+        album = Album.new(album_params)
 
-        if @album.save
-          render json: @album, status: :created, location: @album
+        if album.save
+          head :created
         else
-          render json: @album.errors, status: :unprocessable_entity
+          render json: album.errors, status: :unprocessable_entity
         end
       end
 
       # PATCH/PUT /albums/1
-      # PATCH/PUT /albums/1.json
       def update
-        @album = Album.find(params[:id])
-
-        if @album.update(album_params)
+        album = Album.find(params[:id])
+        if album.update_attributes(album_params)
           head :no_content
         else
-          render json: @album.errors, status: :unprocessable_entity
+          render json: album.errors, status: :unprocessable_entity
         end
       end
 
       # DELETE /albums/1
-      # DELETE /albums/1.json
       def destroy
-        @album = Album.find(params[:id])
-        @album.destroy
-
-        head :no_content
+        album = Album.find(params[:id])
+        if album.destroy
+          head :no_content
+        else
+          if album.errors
+            render json: album.errors, status: :unprocessable_entity
+          else
+            head :unprocessable_entity
+          end
+        end
       end
 
       private # methods below
 
       def album_params
-        params.require(:album).permit(:name, :description)
+        params.permit(:id, :name, :description)
       end
     end
   end
