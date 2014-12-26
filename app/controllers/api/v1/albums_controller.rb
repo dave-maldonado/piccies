@@ -1,7 +1,6 @@
 module Api
   module V1
     class AlbumsController < BaseController
-
       # GET /albums
       def index
         render json: Album.all
