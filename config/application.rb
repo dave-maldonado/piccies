@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Piccies
   class Application < Rails::Application
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.active_record.raise_in_transactional_callbacks = true
     config.generators do |g|
       g.test_framework :rspec,
