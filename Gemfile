@@ -4,6 +4,11 @@ gem 'rails', '4.2.0'
 gem 'rails-api'
 gem 'spring', group: :development
 gem 'sqlite3'
+gem 'haml-rails'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'bower-rails'
 
 group :development, :test do
   gem 'rspec-rails'
