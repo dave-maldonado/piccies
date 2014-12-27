@@ -1,6 +1,6 @@
 module Api
   module V1
-    class BaseController < ApplicationController
+    class BaseController < ApiController
     end
   end
 end

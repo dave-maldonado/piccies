@@ -1,2 +1,2 @@
-class GalleryController < ActionController::Base
+class GalleryController < ApplicationController
 end
