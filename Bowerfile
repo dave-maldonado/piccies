@@ -1,4 +1,5 @@
 asset 'angular'
+asset 'angular-resource'
 asset 'angular-file-upload'
 asset 'bootstrap-sass-official'
 asset 'jquery-ujs'
