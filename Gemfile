@@ -11,6 +11,7 @@ gem 'mini_magick'
 gem 'fog'
 
 # front-end stuff
+gem 'angular-rails-templates'
 gem 'haml-rails'
 gem 'sass-rails'
 gem 'uglifier'
