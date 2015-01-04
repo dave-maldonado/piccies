@@ -1,9 +1,8 @@
 FactoryGirl.define do
   factory :picture do
-    caption 'MyString'
-    description 'MyText'
-    content_type 'MyString'
-    width 1
-    height 1
+    album
+    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'app', 'assets', 'images', 'default.png')) }
+    caption 'such fun!'
+    description 'amaze'
   end
 end
