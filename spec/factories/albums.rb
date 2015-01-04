@@ -1,6 +1,8 @@
+require 'faker'
+
 FactoryGirl.define do
   factory :album do
-    name 'MyString'
-    description 'MyText'
+    name "#{Faker::Name.name}'s Amazing Vacation!"
+    description 'wow, such relax.'
   end
 end
