@@ -26,6 +26,5 @@ end
 
 group :test do
   gem 'faker'
-  gem 'launchy'
   gem 'database_cleaner'
 end
