@@ -49,7 +49,10 @@ module Api
       private # methods below
 
       def album_params
-        params.permit(:id, :name, :description)
+        params.permit(:id, :name, :description, pictures: [:picture_id, :image,
+                                                           :caption, :description,
+                                                           :content_type, :width,
+                                                           :height])
       end
     end
   end

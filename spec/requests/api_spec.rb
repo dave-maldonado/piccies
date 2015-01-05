@@ -1,4 +1,5 @@
 # integration-style tests for picture gallery API
+# TODO: refactor this into something nicer-looking!
 require 'rails_helper'
 
 RSpec.describe 'picture gallery API', type: :request do
@@ -101,20 +102,46 @@ RSpec.describe 'picture gallery API', type: :request do
   end
 
   describe 'GET /api/albums/1/pictures/1' do
-    it 'responds with http status 200'
+    it 'responds with http status 200' do
+      album = FactoryGirl.create :album_with_pictures
+      get api_album_picture_path(1,1)
+      expect(response).to have_http_status 200
+    end
 
-    it 'responds with properly formatted JSON'
+    it 'returns correct attributes' do
+      album = FactoryGirl.create :album_with_pictures
+      get api_album_picture_path(1,1)
+      record = JSON.parse(response.body)
+      expect(record['album_id']).to eq album.pictures[0].album_id
+      expect(record['id']).to eq album.pictures[0].id
+      expect(record['image']['url']).to eq album.pictures[0].image.url
+      expect(record['caption']).to eq album.pictures[0].caption
+    end
   end
 
   describe 'POST /api/albums/1/pictures' do
-    it 'responds with http status 201'
+    it 'responds with http status 201' do
+      album = FactoryGirl.create :album
+      post api_album_pictures_path(1), FactoryGirl.attributes_for(:picture)
+      expect(response).to have_http_status 201
+    end
   end
 
   describe 'PATCH /api/albums/1/pictures/1' do
-    it 'responds with http status 204'
+    it 'responds with http status 204' do
+      album = FactoryGirl.create :album_with_pictures
+      patch api_album_picture_path(1,1), caption: 'derp.'
+      get api_album_picture_path(1,1)
+      record = JSON.parse(response.body)
+      expect(record['caption']).to eq 'derp.'
+    end
   end
 
   describe 'DELETE /api/albums/1/pictures/1' do
-    it 'responds with http status 204'
+    it 'responds with http status 204' do
+      album = FactoryGirl.create :album_with_pictures
+      delete api_album_picture_path(1,1)
+      expect(response).to have_http_status 204
+    end
   end
 end
