@@ -81,14 +81,23 @@ RSpec.describe 'picture gallery API', type: :request do
     end
 
     it 'returns correct attributes' do
-      picture = FactoryGirl.create :album_with_pictures
+      album = FactoryGirl.create :album_with_pictures
       get api_album_pictures_path(1)
-      record = JSON.parse(response.body)
-      puts "record['id'] -> #{record['id']}, picture.id -> #{picture.id}"
-      expect(record['id']).to eq picture.id
+      records = JSON.parse(response.body)
+      records.each.with_index do |record, index|
+        expect(record['album_id']).to eq album.pictures[index].album_id
+        expect(record['id']).to eq album.pictures[index].id
+        expect(record['image']['url']).to eq album.pictures[index].image.url
+        expect(record['caption']).to eq album.pictures[index].caption
+      end
     end
 
-    it 'returns correct number of entries'
+    it 'returns correct number of entries' do
+      album = FactoryGirl.create :album_with_pictures
+      get api_album_pictures_path(1)
+      records = JSON.parse(response.body)
+      expect(records.length).to eq 10
+    end
   end
 
   describe 'GET /api/albums/1/pictures/1' do
