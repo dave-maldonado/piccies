@@ -1,20 +1,20 @@
 module Api
   module V1
     class PicturesController < BaseController
-      # before_filter :get_album
+      before_action :get_album
 
-      # def get_album
-      #   @album = Album.find(params[:album_id])
-      # end
+      def get_album
+        @album = Album.find(params[:album_id])
+      end
 
       # GET album/1/pictures
       def index
-        render json: Picture.where(picture_params)
+        render json: @album.pictures
       end
 
       # GET album/1/pictures/1
       def show
-        render json: Picture.where(picture_params)
+        render json: @album.picture.find(params[:id])
       end
 
       # POST /pictures
@@ -56,7 +56,7 @@ module Api
       private # methods below
 
       def picture_params
-        params.permit(:id, :album_id, :caption, :description,
+        params.permit(:id, :image, :album_id, :caption, :description,
                       :content_type, :width, :height)
       end
     end

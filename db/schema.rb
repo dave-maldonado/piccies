@@ -11,27 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150104055344) do
-
-  create_table "albums", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+ActiveRecord::Schema.define(version: 20_150_104_055_344) do
+  create_table 'albums', force: :cascade do |t|
+    t.string 'name'
+    t.text 'description'
+    t.datetime 'created_at',  null: false
+    t.datetime 'updated_at',  null: false
   end
 
-  create_table "pictures", force: :cascade do |t|
-    t.integer  "album_id"
-    t.string   "caption"
-    t.text     "description"
-    t.string   "content_type"
-    t.integer  "width"
-    t.integer  "height"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "image"
+  create_table 'pictures', force: :cascade do |t|
+    t.integer 'album_id'
+    t.string 'caption'
+    t.text 'description'
+    t.string 'content_type'
+    t.integer 'width'
+    t.integer 'height'
+    t.datetime 'created_at',   null: false
+    t.datetime 'updated_at',   null: false
+    t.string 'image'
   end
 
-  add_index "pictures", ["album_id"], name: "index_pictures_on_album_id"
-
+  add_index 'pictures', ['album_id'], name: 'index_pictures_on_album_id'
 end
