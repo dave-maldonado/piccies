@@ -2,7 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe 'picture gallery API', type: :request do
-
   before(:each) do |example|
     unless example.metadata[:skip_before]
       @album = FactoryGirl.create :album_with_pictures
@@ -101,12 +100,12 @@ RSpec.describe 'picture gallery API', type: :request do
 
   describe 'GET /api/albums/1/pictures/1' do
     it 'responds with http status 200' do
-      get api_album_picture_path(1,1)
+      get api_album_picture_path(1, 1)
       expect(response).to have_http_status 200
     end
 
     it 'returns correct attributes' do
-      get api_album_picture_path(1,1)
+      get api_album_picture_path(1, 1)
       record = JSON.parse(response.body)
       expect(record['album_id']).to eq @album.pictures[0].album_id
       expect(record['id']).to eq @album.pictures[0].id
@@ -124,8 +123,8 @@ RSpec.describe 'picture gallery API', type: :request do
 
   describe 'PATCH /api/albums/1/pictures/1' do
     it 'responds with http status 204' do
-      patch api_album_picture_path(1,1), caption: 'derp.'
-      get api_album_picture_path(1,1)
+      patch api_album_picture_path(1, 1), caption: 'derp.'
+      get api_album_picture_path(1, 1)
       record = JSON.parse(response.body)
       expect(record['caption']).to eq 'derp.'
     end
@@ -133,7 +132,7 @@ RSpec.describe 'picture gallery API', type: :request do
 
   describe 'DELETE /api/albums/1/pictures/1' do
     it 'responds with http status 204' do
-      delete api_album_picture_path(1,1)
+      delete api_album_picture_path(1, 1)
       expect(response).to have_http_status 204
     end
   end

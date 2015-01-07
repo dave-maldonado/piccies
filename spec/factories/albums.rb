@@ -6,7 +6,6 @@ FactoryGirl.define do
     description 'wow, such relax.'
 
     factory :album_with_pictures do
-
       transient do
         pictures_count 10
       end

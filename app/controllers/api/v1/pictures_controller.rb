@@ -15,7 +15,7 @@ module Api
 
       # POST album/1/pictures
       def create
-        picture = Picture.new()
+        picture = Picture.new
         picture.caption = params[:caption]
         picture.description = params[:description]
         picture.album_id = params[:album_id]
