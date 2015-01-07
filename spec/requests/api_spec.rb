@@ -33,7 +33,7 @@ RSpec.describe 'picture gallery API', type: :request do
     end
   end
 
-  describe 'GET /api/@albums/1' do
+  describe 'GET /api/albums/1' do
     it 'responds with http status 200'do
       get api_album_path(1)
       expect(response).to have_http_status 200
@@ -47,14 +47,14 @@ RSpec.describe 'picture gallery API', type: :request do
     end
   end
 
-  describe 'POST /api/@albums' do
+  describe 'POST /api/albums' do
     it 'responds with http status 201' do
       post api_albums_path, FactoryGirl.attributes_for(:album)
       expect(response).to have_http_status 201
     end
   end
 
-  describe 'PATCH /api/@albums/1' do
+  describe 'PATCH /api/albums/1' do
     it 'responds with http status 204' do
       patch api_album_path(1),  name: "Dave's Incredible Fishtanks!"
       expect(response).to have_http_status 204
@@ -68,14 +68,14 @@ RSpec.describe 'picture gallery API', type: :request do
     end
   end
 
-  describe 'DELETE /api/@albums/1' do
+  describe 'DELETE /api/albums/1' do
     it 'responds with http status 204' do
       delete api_album_path(1)
       expect(response).to have_http_status 204
     end
   end
 
-  describe 'GET /api/@albums/1/pictures' do
+  describe 'GET /api/albums/1/pictures' do
     it 'responds with http status 200' do
       get api_album_pictures_path(1)
       expect(response).to have_http_status 200
@@ -99,7 +99,7 @@ RSpec.describe 'picture gallery API', type: :request do
     end
   end
 
-  describe 'GET /api/@albums/1/pictures/1' do
+  describe 'GET /api/albums/1/pictures/1' do
     it 'responds with http status 200' do
       get api_album_picture_path(1,1)
       expect(response).to have_http_status 200
@@ -115,14 +115,14 @@ RSpec.describe 'picture gallery API', type: :request do
     end
   end
 
-  describe 'POST /api/@albums/1/pictures' do
+  describe 'POST /api/albums/1/pictures' do
     it 'responds with http status 201' do
       post api_album_pictures_path(1), FactoryGirl.attributes_for(:picture)
       expect(response).to have_http_status 201
     end
   end
 
-  describe 'PATCH /api/@albums/1/pictures/1' do
+  describe 'PATCH /api/albums/1/pictures/1' do
     it 'responds with http status 204' do
       patch api_album_picture_path(1,1), caption: 'derp.'
       get api_album_picture_path(1,1)
@@ -131,7 +131,7 @@ RSpec.describe 'picture gallery API', type: :request do
     end
   end
 
-  describe 'DELETE /api/@albums/1/pictures/1' do
+  describe 'DELETE /api/albums/1/pictures/1' do
     it 'responds with http status 204' do
       delete api_album_picture_path(1,1)
       expect(response).to have_http_status 204
