@@ -29,16 +29,6 @@
     });
 
     app.controller('UploadCtrl', function($scope, FileUploader) {
-	$scope.add = function() {
-	    var file, reader;
-
-	    file = document.getElementById('file').files[0];
-	    reader = new FileReader();
-	    reader.onloadend = function(e) {
-		var data = e.target.result;
-		// figure out how to send 'data' to Rails backend
-	    }
-	    reader.readAsBinaryString(file);
-	}
+	$scope.uploader = new FileUploader({url: 'http://localhost:3000/api/albums/5/pictures'});
     });
 })();

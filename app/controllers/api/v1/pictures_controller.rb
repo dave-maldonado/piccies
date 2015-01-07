@@ -15,7 +15,11 @@ module Api
 
       # POST album/1/pictures
       def create
-        picture = Picture.new(picture_params)
+        picture = Picture.new()
+        picture.caption = params[:caption]
+        picture.description = params[:description]
+        picture.album_id = params[:album_id]
+        picture.image = params[:file]
 
         if picture.save
           head :created
@@ -57,8 +61,8 @@ module Api
       end
 
       def picture_params
-        params.permit(:id, :image, :album_id, :caption, :description,
-                      :content_type, :width, :height)
+        params.permit(:id, :image, :file, :album_id, :caption,
+                      :description, :content_type, :width, :height)
       end
     end
   end
