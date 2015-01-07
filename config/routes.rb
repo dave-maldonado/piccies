@@ -8,7 +8,6 @@ Rails.application.routes.draw do
       resources :albums, except: [:new, :edit] do
         resources :pictures, except: [:new, :edit]
       end
-      resources :pictures, except: [:new, :edit]
     end
   end
 

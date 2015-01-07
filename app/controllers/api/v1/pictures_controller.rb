@@ -1,25 +1,25 @@
 module Api
   module V1
     class PicturesController < BaseController
-      # before_filter :get_album
-
-      # def get_album
-      #   @album = Album.find(params[:album_id])
-      # end
+      before_action :get_album
 
       # GET album/1/pictures
       def index
-        render json: Picture.where(picture_params)
+        render json: @album.pictures
       end
 
       # GET album/1/pictures/1
       def show
-        render json: Picture.where(picture_params)
+        render json: @album.pictures.find(params[:id])
       end
 
-      # POST /pictures
+      # POST album/1/pictures
       def create
-        picture = Picture.new(picture_params)
+        picture = Picture.new
+        picture.caption = params[:caption]
+        picture.description = params[:description]
+        picture.album_id = params[:album_id]
+        picture.image = params[:file]
 
         if picture.save
           head :created
@@ -28,9 +28,9 @@ module Api
         end
       end
 
-      # PATCH/PUT /pictures/1
+      # PATCH/PUT album/1/pictures/1
       def update
-        picture = Picture.find(params[:id])
+        picture = @album.pictures.find(params[:id])
 
         if picture.update_attributes(picture_params)
           head :no_content
@@ -39,9 +39,10 @@ module Api
         end
       end
 
-      # DELETE /pictures/1
+      # DELETE album/1/pictures/1
       def destroy
-        picture = Picture.find(params[:id])
+        picture = @album.pictures.find(params[:id])
+
         if picture.destroy
           head :no_content
         else
@@ -55,9 +56,13 @@ module Api
 
       private # methods below
 
+      def get_album
+        @album = Album.find(params[:album_id])
+      end
+
       def picture_params
-        params.permit(:id, :album_id, :caption, :description,
-                      :content_type, :width, :height)
+        params.permit(:id, :image, :file, :album_id, :caption,
+                      :description, :content_type, :width, :height)
       end
     end
   end
